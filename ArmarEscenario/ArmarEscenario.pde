@@ -10,7 +10,7 @@ AudioPlayer SonidoTanque;
 AudioPlayer audio;
 PImage tanque, bala, fondo, rehen, persona, enemigo;
 float EnemigoX = 0, EnemigoVel = 2;
-int direccion = 1, score;
+int direccion = 1, puntaje;
 float tanqueX, tanqueY;
 ArrayList<Bala> balas = new ArrayList<Bala>();
 
@@ -37,7 +37,7 @@ void draw() {
   image(tanque, tanqueX, tanqueY);
   image(rehen, 780, height/2);
   image(persona, 40, height/2*0.65);
-  showScore();
+  puntaje();
   if (keyPressed) {
     if (key == 'a' || key == 'A') {
       tanqueX -= 5;
@@ -54,10 +54,10 @@ void draw() {
 
     // Detectar colisión con el enemigo
     if (b.y < 50 + enemigo.height / 2 && b.x > EnemigoX - enemigo.width / 2 && b.x < EnemigoX + enemigo.width / 2) {
-      // Si hay colisión, suma 1 al score y elimina la bala
+      // Si hay colisión, suma 1 al puntaje y elimina la bala
       balas.remove(i);
-      // Incrementa el score
-      score++;
+      // Incrementa el puntaje
+      puntaje++;
       // Reinicia la posición del enemigo
       EnemigoX = random(enemigo.width / 2, width - enemigo.width / 2);
     }
@@ -107,9 +107,9 @@ class Bala {
     y -= velocidad;
   }
 }
-void showScore() {
+void puntaje() {
   fill(0);
   textSize(20);
   textAlign(RIGHT);
-  text("Puntaje: " + score, width - 20, 30);
+  text("Puntaje: " + puntaje, width - 20, 30);
 }
